@@ -3,6 +3,8 @@ package com.example.testbd.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class Departement {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;   
     private String departementName;
+    @JsonBackReference
     @OneToMany(mappedBy = "departement")
     Collection<Employe> employes = new ArrayList<>();
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.testbd.entities.Employe;
 import com.example.testbd.models.EmployeModel;
+import com.example.testbd.services.DepartementService;
 import com.example.testbd.services.EmployeService;
 
 @RestController
@@ -21,11 +22,15 @@ public class EmployeRestController {
     @Autowired
     private EmployeService employeService;
 
+    @Autowired
+    private DepartementService departementService;
+
     @PostMapping("/employes")
     void createEmploye(@RequestBody EmployeModel model) {
         Employe employe = new Employe();
         employe.setEmployeName(model.getEmployeName());
         employe.setAge(model.getAge());
+        employe.setDepartement(this.departementService.findOneDepartement(model.getDepartementId()));
         this.employeService.createEmploye(employe);
     }
 
